@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Send, Camera } from 'lucide-react';
+import { Send, Camera, Bot } from 'lucide-react';
 
 interface Message {
   id: number;
@@ -50,13 +50,16 @@ export default function ChatInterface({ onVideoCall }: ChatInterfaceProps) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="bg-blue-500 text-white p-4 flex justify-between items-center">
-        <h2 className="text-xl font-bold">Chatbot Assistant</h2>
+    <div className="flex flex-col h-full bg-gradient-to-br from-blue-50 to-indigo-100 shadow-lg rounded-lg overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+          <Bot className="h-6 w-6" />
+          <h2 className="text-xl font-bold">AI Assistant</h2>
+        </div>
         <Button
           variant="outline"
           size="icon"
-          className="bg-white text-blue-500 hover:bg-blue-100"
+          className="bg-white text-indigo-600 hover:bg-indigo-100 transition-colors duration-200"
           onClick={onVideoCall}
         >
           <Camera className="h-5 w-5" />
@@ -73,8 +76,8 @@ export default function ChatInterface({ onVideoCall }: ChatInterfaceProps) {
             <div
               className={`inline-block p-3 rounded-lg max-w-[80%] ${
                 message.sender === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-800'
+                  ? 'bg-indigo-500 text-white'
+                  : 'bg-white text-gray-800 shadow-md'
               }`}
             >
               {message.text}
@@ -83,16 +86,16 @@ export default function ChatInterface({ onVideoCall }: ChatInterfaceProps) {
         ))}
         <div ref={messagesEndRef} />
       </ScrollArea>
-      <div className="p-4 border-t">
+      <div className="p-4 bg-white border-t border-indigo-100">
         <div className="flex space-x-2">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-            className="flex-grow"
+            className="flex-grow border-indigo-200 focus:ring-indigo-500 focus:border-indigo-500"
           />
-          <Button onClick={handleSend} className="bg-blue-500 hover:bg-blue-600">
+          <Button onClick={handleSend} className="bg-indigo-500 hover:bg-indigo-600 transition-colors duration-200">
             <Send className="h-4 w-4" />
           </Button>
         </div>
